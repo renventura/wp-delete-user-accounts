@@ -1,0 +1,4 @@
+WP Delete User Accounts
+
+January 13, 2016 - version 1.0
+* Initial version
