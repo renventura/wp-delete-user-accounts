@@ -56,7 +56,7 @@ jQuery(document).ready(function($) {
 				disableButtonsOnConfirm: true,
 				// showLoaderOnConfirm: true,
 				// confirmLoadingButtonColor: '#f5f7fa',
-				inputPlaceholder: 'Confirm by typing DELETE'
+				inputPlaceholder: wp_delete_user_accounts_js.input_placeholder
 			},
 			function(input) {
 
@@ -64,8 +64,8 @@ jQuery(document).ready(function($) {
 					// Input was not correct
 					swal(
 						{
-							title: 'Error',
-							text: 'Your confirmation input was incorrect.',
+							title: wp_delete_user_accounts_js.incorrect_prompt_title,
+							text: wp_delete_user_accounts_js.incorrect_prompt_text,
 							type: 'error',
 							showLoaderOnConfirm: false,
 						}
@@ -76,8 +76,8 @@ jQuery(document).ready(function($) {
 				// Processing modal
 				swal(
 					{
-						title: 'Processing...',
-						text: 'Just a moment while we process your request.',
+						title: wp_delete_user_accounts_js.processing_title,
+						text: wp_delete_user_accounts_js.processing_text,
 						type: 'info',
 						confirmLoadingButtonColor: '#f5f7fa',
 						showConfirmButton: false

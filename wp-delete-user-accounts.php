@@ -136,6 +136,11 @@ class WP_Delete_User_Accounts {
 			'alert_title' => __( 'Whoa, there!', 'wp-delete-user-accounts' ),
 			'alert_text' => __( 'Once you delete your account, there\'s no getting it back. Make sure you want to do this.', 'wp-delete-user-accounts' ),
 			'confirm_text' => __( 'Yep, delete it', 'wp-delete-user-accounts' ),
+			'incorrect_prompt_title' => __( 'Error', 'wp-delete-user-accounts' ),
+			'incorrect_prompt_text' => __( 'Your confirmation input was incorrect.', 'wp-delete-user-accounts' ),
+			'processing_title' => __( 'Processing...', 'wp-delete-user-accounts' ),
+			'processing_text' => __( 'Just a moment while we process your request.', 'wp-delete-user-accounts' ),
+			'input_placeholder' => __( 'Confirm by typing DELETE', 'wp-delete-user-accounts' ),
 			'redirect_url' => home_url(),
 			'nonce' => wp_create_nonce( 'wp_delete_user_accounts_nonce' ),
 		);
