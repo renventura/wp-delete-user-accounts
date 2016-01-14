@@ -21,7 +21,7 @@ Allow your users (except for administrators) to manually delete their own accoun
 
 = Manually =
 
-1. Download the zip file, decompress the file and upload tha main plugin folder to the `/wp-content/plugins/` directory.
+1. Download the zip file, decompress the file and upload the main plugin folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin.
 
 == Screenshots ==
