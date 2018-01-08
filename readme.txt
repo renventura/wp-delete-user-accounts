@@ -2,7 +2,7 @@
 
 Contributors: EngageWP
 Tags: profiles, accounts
-Tested up to: 4.4
+Tested up to: 4.9.1
 Stable tag: 1.0.1
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
