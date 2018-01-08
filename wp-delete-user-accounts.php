@@ -150,7 +150,7 @@ class WP_Delete_User_Accounts {
 			if ( get_current_screen()->base == 'profile' ) {
 				wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
 				wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
-				wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
+				wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert-js' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
 				wp_localize_script( 'wp-delete-user-accounts-js', 'wp_delete_user_accounts_js', array_merge( $vars, array( 'is_admin' => 'true' ) ) );
 			}
 		
@@ -158,7 +158,7 @@ class WP_Delete_User_Accounts {
 
 			wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
 			wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
-			wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
+			wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert-js' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
 			wp_localize_script( 'wp-delete-user-accounts-js', 'wp_delete_user_accounts_js', array_merge( $vars, array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) ) );
 		}
 	}
