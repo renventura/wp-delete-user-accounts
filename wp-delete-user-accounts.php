@@ -3,7 +3,7 @@
  * Plugin Name: WP Delete User Accounts
  * Plugin URI: http://www.engagewp.com/
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Ren Ventura
  * Author URI: http://www.engagewp.com/
  *
@@ -80,7 +80,7 @@ class WP_Delete_User_Accounts {
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', 1.0 );
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.0.1' );
 		}
 	}
 

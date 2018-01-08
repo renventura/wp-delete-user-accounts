@@ -1,4 +1,7 @@
 WP Delete User Accounts
 
+January 8, 2018 - version 1.0.1
+* Fixed dependency array on enqueues
+
 January 13, 2016 - version 1.0
 * Initial version
