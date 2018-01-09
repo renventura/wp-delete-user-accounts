@@ -11,3 +11,7 @@ button#delete-my-account {
 	font-size: 18px;
 	padding: 10px;
 }
+
+button#delete-my-account:hover {
+	cursor: pointer;
+}
