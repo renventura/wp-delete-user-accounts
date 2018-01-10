@@ -1,11 +1,10 @@
 <?php
 /**
  * Plugin Name: WP Delete User Accounts
- * Plugin URI: http://www.engagewp.com/
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Ren Ventura
- * Author URI: http://www.engagewp.com/
+ * Author URI: https://renventura.com
  *
  * Text Domain: wp-delete-user-accounts
  *
@@ -14,7 +13,7 @@
  */
 
  /*
-	Copyright 2016  Ren Ventura, EngageWP.com
+	Copyright 2016  Ren Ventura, RenVentura.com
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -67,6 +66,18 @@ class WP_Delete_User_Accounts {
 			define( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_FILE', __FILE__ );
 		}
 
+		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.0.2' );
+		}
+
+		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN' ) ) {
+			define( 'WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN', 'wp-delete-user-accounts' );
+		}
+
+		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {
+			define( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME', plugin_basename( WP_DELETE_USER_ACCOUNTS_PLUGIN_FILE ) );
+		}
+
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_DIR' ) ) {
 			define( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 		}
@@ -77,10 +88,6 @@ class WP_Delete_User_Accounts {
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR' ) ) {
 			define( 'WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR', WP_DELETE_USER_ACCOUNTS_PLUGIN_DIR . 'templates/' );
-		}
-
-		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.0.1' );
 		}
 	}
 
@@ -110,9 +117,23 @@ class WP_Delete_User_Accounts {
 	 *	Kick everything off
 	 */
 	public function hooks() {
-
+		add_action( 'plugins_loaded', array( $this, 'loaded' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueues' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueues' ) );
+	}
+
+	/**
+	 *	Load plugin text domain
+	 */
+	public function loaded() {
+
+		$locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
+		$locale = apply_filters( 'plugin_locale', $locale, WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN );
+		
+		unload_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN );
+		
+		load_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, WP_LANG_DIR . '/wp-delete-user-accounts/wp-delete-user-accounts-' . $locale . '.mo' );
+		load_plugin_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, false, WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME . '/languages' );
 	}
 
 	/**
@@ -145,16 +166,14 @@ class WP_Delete_User_Accounts {
 			'nonce' => wp_create_nonce( 'wp_delete_user_accounts_nonce' ),
 		);
 
-		if ( is_admin() ) {
+		if ( is_admin() && get_current_screen()->base == 'profile' ) {
 
-			if ( get_current_screen()->base == 'profile' ) {
-				wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
-				wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
-				wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert-js' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
-				wp_localize_script( 'wp-delete-user-accounts-js', 'wp_delete_user_accounts_js', array_merge( $vars, array( 'is_admin' => 'true' ) ) );
-			}
+			wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
+			wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
+			wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert-js' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
+			wp_localize_script( 'wp-delete-user-accounts-js', 'wp_delete_user_accounts_js', array_merge( $vars, array( 'is_admin' => 'true' ) ) );
 		
-		} elseif ( has_shortcode( $post->post_content, 'wp_delete_user_accounts' ) ) {
+		} elseif ( is_object( $post ) && has_shortcode( $post->post_content, 'wp_delete_user_accounts' ) ) {
 
 			wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
 			wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );

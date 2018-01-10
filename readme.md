@@ -37,6 +37,9 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.0.2__
+* Add POT file for translations
+
 __1.0.1__
 * Fixed dependency array on enqueues
 

@@ -1,5 +1,8 @@
 WP Delete User Accounts
 
+January 10, 2018 - version 1.0.2
+* Add POT file for translations
+
 January 8, 2018 - version 1.0.1
 * Fixed dependency array on enqueues
 

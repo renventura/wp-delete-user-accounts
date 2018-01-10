@@ -3,7 +3,7 @@
 Contributors: EngageWP
 Tags: profiles, accounts
 Tested up to: 4.9.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -35,6 +35,9 @@ Allow your users (except for administrators) to manually delete their own accoun
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.0.2 =
+* Add POT file for translations
 
 = 1.0.1 =
 * Fixed dependency array on enqueues
