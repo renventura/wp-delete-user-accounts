@@ -1,5 +1,8 @@
 WP Delete User Accounts
 
+July 5, 2018 - version 1.0.3
+* Changed plugin text domain to dirname instead of basename to remove .php extension from path
+
 January 10, 2018 - version 1.0.2
 * Add POT file for translations
 

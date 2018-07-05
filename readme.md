@@ -37,6 +37,9 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.0.3__
+* Changed plugin text domain to dirname instead of basename to remove .php extension from path
+
 __1.0.2__
 * Add POT file for translations
 
