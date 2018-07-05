@@ -133,7 +133,7 @@ class WP_Delete_User_Accounts {
 		unload_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN );
 		
 		load_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, WP_LANG_DIR . '/wp-delete-user-accounts/wp-delete-user-accounts-' . $locale . '.mo' );
-		load_plugin_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, false, WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME . '/languages' );
+		load_plugin_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, false, dirname( WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME ) . '/languages' );
 	}
 
 	/**
