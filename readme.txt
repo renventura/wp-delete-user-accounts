@@ -1,8 +1,8 @@
 === WP Delete User Accounts ===
 
-Contributors: EngageWP
+Contributors: renventura
 Tags: profiles, accounts
-Tested up to: 4.9.1
+Tested up to: 4.9.7
 Stable tag: 1.0.3
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php

@@ -70,10 +70,6 @@ class WP_Delete_User_Accounts {
 			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.0.3' );
 		}
 
-		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN', 'wp-delete-user-accounts' );
-		}
-
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {
 			define( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME', plugin_basename( WP_DELETE_USER_ACCOUNTS_PLUGIN_FILE ) );
 		}
@@ -128,12 +124,12 @@ class WP_Delete_User_Accounts {
 	public function loaded() {
 
 		$locale = is_admin() && function_exists( 'get_user_locale' ) ? get_user_locale() : get_locale();
-		$locale = apply_filters( 'plugin_locale', $locale, WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN );
+		$locale = apply_filters( 'plugin_locale', $locale, 'wp-delete-user-accounts' );
 		
-		unload_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN );
+		unload_textdomain( 'wp-delete-user-accounts' );
 		
-		load_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, WP_LANG_DIR . '/wp-delete-user-accounts/wp-delete-user-accounts-' . $locale . '.mo' );
-		load_plugin_textdomain( WP_DELETE_USER_ACCOUNTS_TEXT_DOMAIN, false, dirname( WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME ) . '/languages' );
+		load_textdomain( 'wp-delete-user-accounts', WP_LANG_DIR . '/wp-delete-user-accounts/wp-delete-user-accounts-' . $locale . '.mo' );
+		load_plugin_textdomain( 'wp-delete-user-accounts', false, dirname( WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME ) . '/languages' );
 	}
 
 	/**
