@@ -64,7 +64,7 @@ function wp_delete_user_accounts_load_assets_on_woocommerce_edit_account( $load 
 }
 ```
 
-This shows you how to add the delete button to a WooCommerce template using a WooCommerce hook (in this example, )
+This shows you how to add the delete button to a WooCommerce template using a WooCommerce hook (in this example, woocommerce_after_edit_account_form)
 ```php
 add_action( 'woocommerce_after_edit_account_form', 'wp_delete_user_accounts_delete_button_after_edit_account' );
 /**
