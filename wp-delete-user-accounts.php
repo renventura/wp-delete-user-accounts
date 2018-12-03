@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Delete User Accounts
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.0.3
+ * Version: 1.1.0
  * Author: Ren Ventura
  * Author URI: https://renventura.com
  *
@@ -67,7 +67,7 @@ class WP_Delete_User_Accounts {
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.0.3' );
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.1.0' );
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {
@@ -91,22 +91,10 @@ class WP_Delete_User_Accounts {
 	 *	Include PHP files
 	 */
 	public function includes() {
-
-		$path = realpath( WP_DELETE_USER_ACCOUNTS_PLUGIN_DIR . 'includes' );
-
-		$objects = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ), RecursiveIteratorIterator::SELF_FIRST );
-
-		foreach ( $objects as $name => $object ) {
-
-			if ( is_file( $name ) ) {
-
-				if ( pathinfo( $name, PATHINFO_EXTENSION ) !== 'php' ) {
-					continue;
-				}
-
-				include_once $name;
-			}
-		}
+		include_once 'includes/functions.php';
+		include_once 'includes/process-ajax.php';
+		include_once 'includes/frontend.php';
+		include_once 'includes/admin.php';
 	}
 
 	/**
@@ -169,7 +157,7 @@ class WP_Delete_User_Accounts {
 			wp_enqueue_script( 'wp-delete-user-accounts-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/wp-delete-user-accounts.js', array( 'jquery', 'sweetalert-js' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
 			wp_localize_script( 'wp-delete-user-accounts-js', 'wp_delete_user_accounts_js', array_merge( $vars, array( 'is_admin' => 'true' ) ) );
 		
-		} elseif ( is_object( $post ) && has_shortcode( $post->post_content, 'wp_delete_user_accounts' ) ) {
+		} elseif ( apply_filters( 'wp_delete_user_accounts_load_assets_on_frontend', ( is_object( $post ) && has_shortcode( $post->post_content, 'wp_delete_user_accounts' ) ) ) ) {
 
 			wp_enqueue_style( 'wp-delete-user-accounts-css', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/css/wp-delete-user-accounts.css', '', WP_DELETE_USER_ACCOUNTS_VERSION );
 			wp_enqueue_script( 'sweetalert-js', WP_DELETE_USER_ACCOUNTS_PLUGIN_URL . 'assets/js/sweetalert.min.js', array( 'jquery' ), WP_DELETE_USER_ACCOUNTS_VERSION, true );
