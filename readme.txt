@@ -3,7 +3,7 @@
 Contributors: renventura
 Tags: profiles, accounts
 Tested up to: 5.0
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -35,6 +35,9 @@ Allow your users (except for administrators) to manually delete their own accoun
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.1.1 =
+* Updated translatable strings
 
 = 1.1 =
 * Added filter for loading CSS and JS assets anywhere on the frontend (e.g. within WooCommerce templates).

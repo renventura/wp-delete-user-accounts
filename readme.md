@@ -81,6 +81,9 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.1.1__
+* Updated translatable strings
+
 __1.1.0__
 * Added filter for loading CSS and JS assets anywhere on the frontend (e.g. within WooCommerce templates).
 

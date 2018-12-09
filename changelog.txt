@@ -1,5 +1,8 @@
 WP Delete User Accounts
 
+December 3, 2018 - version 1.1.1
+* Updated translatable strings
+
 December 3, 2018 - version 1.1.0
 * Added filter for loading CSS and JS assets anywhere on the frontend (e.g. within WooCommerce templates).
 

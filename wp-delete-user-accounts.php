@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Delete User Accounts
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Ren Ventura
  * Author URI: https://renventura.com
  *
@@ -67,7 +67,7 @@ class WP_Delete_User_Accounts {
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.1.0' );
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.1.1' );
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {
@@ -141,6 +141,7 @@ class WP_Delete_User_Accounts {
 			'alert_title' => __( 'Whoa, there!', 'wp-delete-user-accounts' ),
 			'alert_text' => __( 'Once you delete your account, there\'s no getting it back. Make sure you want to do this.', 'wp-delete-user-accounts' ),
 			'confirm_text' => __( 'Yep, delete it', 'wp-delete-user-accounts' ),
+			'cancel_text' => __( 'Cancel', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_title' => __( 'Error', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_text' => __( 'Your confirmation input was incorrect.', 'wp-delete-user-accounts' ),
 			'processing_title' => __( 'Processing...', 'wp-delete-user-accounts' ),

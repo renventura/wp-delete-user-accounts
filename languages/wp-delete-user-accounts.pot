@@ -1,44 +1,70 @@
-# Loco Gettext template
+# Copyright (C) 2018 wp-delete-user-accounts
+# This file is distributed under the same license as the wp-delete-user-accounts package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Delete User Accounts\n"
-"Report-Msgid-Bugs-To: Translator Name <translations@example.com>\n"
-"POT-Creation-Date: 2018-01-10 16:32-0500\n"
-"PO-Revision-Date: 2018-01-10 16:32-0500\n"
-"Last-Translator: \n"
-"Language-Team: Ren Ventura <rv@renventura.com>\n"
-"Language: en\n"
+"Project-Id-Version: wp-delete-user-accounts\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Revision-Date: Wed Jan 20 2016 10:32:24 GMT-0500 (EST)\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"Language-Team: Ren Ventura <rv@renventura.com>\n"
+"Last-Translator: Ren Ventura <rv@renventura.com>\n"
+"Report-Msgid-Bugs-To: https://renventura.com\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
-"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
-"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
-"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: wp-delete-user-accounts.php:141
+msgid "Whoa, there!"
+msgstr ""
+
+#: wp-delete-user-accounts.php:142
+msgid "Once you delete your account, there's no getting it back. Make sure you want to do this."
+msgstr ""
+
+#: wp-delete-user-accounts.php:143
+msgid "Yep, delete it"
+msgstr ""
+
+#: wp-delete-user-accounts.php:144
+msgid "Cancel"
+msgstr ""
+
+#: wp-delete-user-accounts.php:145
+msgid "Error"
+msgstr ""
+
+#: wp-delete-user-accounts.php:146
+msgid "Your confirmation input was incorrect."
+msgstr ""
+
+#: wp-delete-user-accounts.php:147
+msgid "Processing..."
+msgstr ""
+
+#: wp-delete-user-accounts.php:148
+msgid "Just a moment while we process your request."
+msgstr ""
+
+#: wp-delete-user-accounts.php:149
+msgid "Confirm by typing DELETE"
+msgstr ""
 
 #: includes/admin.php:30
 msgid "Delete Account"
 msgstr ""
 
-#: includes/admin.php:32 includes/frontend.php:43
-msgid ""
-"This will cause your account to be permanently deleted. You will not be able "
-"to recover your account."
+#: includes/admin.php:32, includes/frontend.php:43
+msgid "This will cause your account to be permanently deleted. You will not be able to recover your account."
 msgstr ""
 
 #: includes/functions.php:23
 msgid "Delete My Account"
 msgstr ""
 
-#: includes/process-ajax.php:36 includes/process-ajax.php:45
-#: includes/process-ajax.php:80
+#: includes/process-ajax.php:36, includes/process-ajax.php:45, includes/process-ajax.php:80
 msgid "Error!"
 msgstr ""
 
@@ -60,38 +86,4 @@ msgstr ""
 
 #: includes/process-ajax.php:81
 msgid "Request failed."
-msgstr ""
-
-#: wp-delete-user-accounts.php:157
-msgid "Whoa, there!"
-msgstr ""
-
-#: wp-delete-user-accounts.php:158
-msgid ""
-"Once you delete your account, there's no getting it back. Make sure you want "
-"to do this."
-msgstr ""
-
-#: wp-delete-user-accounts.php:159
-msgid "Yep, delete it"
-msgstr ""
-
-#: wp-delete-user-accounts.php:160
-msgid "Error"
-msgstr ""
-
-#: wp-delete-user-accounts.php:161
-msgid "Your confirmation input was incorrect."
-msgstr ""
-
-#: wp-delete-user-accounts.php:162
-msgid "Processing..."
-msgstr ""
-
-#: wp-delete-user-accounts.php:163
-msgid "Just a moment while we process your request."
-msgstr ""
-
-#: wp-delete-user-accounts.php:164
-msgid "Confirm by typing DELETE"
 msgstr ""

@@ -52,6 +52,7 @@ jQuery(document).ready(function($) {
 				showCancelButton: true,
 				closeOnConfirm: false,
 				confirmButtonText: wp_delete_user_accounts_js.confirm_text,
+				cancelButtonText: wp_delete_user_accounts_js.cancel_text,
 				confirmButtonColor: '#EC5245',
 				disableButtonsOnConfirm: true,
 				// showLoaderOnConfirm: true,
