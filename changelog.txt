@@ -1,5 +1,8 @@
 WP Delete User Accounts
 
+December 10, 2018 - version 1.2
+* Added filter for modifying script localization variables (e.g. the redirect URL)
+
 December 3, 2018 - version 1.1.1
 * Updated translatable strings
 

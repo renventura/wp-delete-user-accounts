@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Delete User Accounts
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.1.1
+ * Version: 1.2
  * Author: Ren Ventura
  * Author URI: https://renventura.com
  *
@@ -67,7 +67,7 @@ class WP_Delete_User_Accounts {
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.1.1' );
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.2' );
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {
@@ -137,7 +137,7 @@ class WP_Delete_User_Accounts {
 
 		global $post;
 
-		$vars = array(
+		$vars = apply_filters( 'wp_delete_user_accounts_localize_script_vars', array(
 			'alert_title' => __( 'Whoa, there!', 'wp-delete-user-accounts' ),
 			'alert_text' => __( 'Once you delete your account, there\'s no getting it back. Make sure you want to do this.', 'wp-delete-user-accounts' ),
 			'confirm_text' => __( 'Yep, delete it', 'wp-delete-user-accounts' ),
@@ -147,9 +147,10 @@ class WP_Delete_User_Accounts {
 			'processing_title' => __( 'Processing...', 'wp-delete-user-accounts' ),
 			'processing_text' => __( 'Just a moment while we process your request.', 'wp-delete-user-accounts' ),
 			'input_placeholder' => __( 'Confirm by typing DELETE', 'wp-delete-user-accounts' ),
-			'redirect_url' => home_url(),
-			'nonce' => wp_create_nonce( 'wp_delete_user_accounts_nonce' ),
-		);
+			'redirect_url' => home_url()
+		) );
+
+		$vars['nonce'] = wp_create_nonce( 'wp_delete_user_accounts_nonce' );
 
 		if ( is_admin() && get_current_screen()->base == 'profile' ) {
 

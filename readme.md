@@ -81,6 +81,9 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.2__
+* Added filter for modifying script localization variables (e.g. the redirect URL)
+
 __1.1.1__
 * Updated translatable strings
 
