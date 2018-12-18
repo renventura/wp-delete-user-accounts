@@ -94,7 +94,7 @@ class WP_Delete_User_Accounts {
 		include_once 'includes/functions.php';
 		include_once 'includes/process-ajax.php';
 		include_once 'includes/frontend.php';
-		include_once 'includes/admin.php';
+		include_once 'includes/admin-profile.php';
 	}
 
 	/**
