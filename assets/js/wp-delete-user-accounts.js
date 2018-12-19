@@ -51,8 +51,8 @@ jQuery(document).ready(function($) {
 				animation: 'slide-from-top',
 				showCancelButton: true,
 				closeOnConfirm: false,
-				confirmButtonText: wp_delete_user_accounts_js.confirm_text,
-				cancelButtonText: wp_delete_user_accounts_js.cancel_text,
+				confirmButtonText: wp_delete_user_accounts_js.button_confirm_text,
+				cancelButtonText: wp_delete_user_accounts_js.button_cancel_text,
 				confirmButtonColor: '#EC5245',
 				disableButtonsOnConfirm: true,
 				// showLoaderOnConfirm: true,
@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
 			},
 			function(input) {
 
-				if ( input !== 'DELETE' ) {
+				if ( input !== wp_delete_user_accounts_js.confirm_text ) {
 					// Input was not correct
 					swal(
 						{

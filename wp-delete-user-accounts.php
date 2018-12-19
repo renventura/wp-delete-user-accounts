@@ -137,16 +137,19 @@ class WP_Delete_User_Accounts {
 
 		global $post;
 
+		$confirm_text = apply_filters( 'wp_delete_user_account_confirm_delete_text', __( 'DELETE', 'tdomain' ) );
+
 		$vars = apply_filters( 'wp_delete_user_accounts_localize_script_vars', array(
 			'alert_title' => __( 'Whoa, there!', 'wp-delete-user-accounts' ),
 			'alert_text' => __( 'Once you delete your account, there\'s no getting it back. Make sure you want to do this.', 'wp-delete-user-accounts' ),
-			'confirm_text' => __( 'Yep, delete it', 'wp-delete-user-accounts' ),
-			'cancel_text' => __( 'Cancel', 'wp-delete-user-accounts' ),
+			'confirm_text' => $confirm_text,
+			'button_confirm_text' => __( 'Yep, delete it', 'wp-delete-user-accounts' ),
+			'button_cancel_text' => __( 'Cancel', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_title' => __( 'Error', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_text' => __( 'Your confirmation input was incorrect.', 'wp-delete-user-accounts' ),
 			'processing_title' => __( 'Processing...', 'wp-delete-user-accounts' ),
 			'processing_text' => __( 'Just a moment while we process your request.', 'wp-delete-user-accounts' ),
-			'input_placeholder' => __( 'Confirm by typing DELETE', 'wp-delete-user-accounts' ),
+			'input_placeholder' => sprintf( '%s %s', __( 'Confirm by typing', 'wp-delete-user-accounts' ), $confirm_text ),
 			'redirect_url' => home_url()
 		) );
 
