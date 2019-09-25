@@ -50,14 +50,6 @@ class WP_Delete_User_Accounts_AJAX {
 		// Get the current user
 		$user_id = get_current_user_id();
 
-		// Get user meta
-		$meta = get_user_meta( $user_id );
-
-		// Delete user's meta
-		foreach ( $meta as $key => $val ) {
-			delete_user_meta( $user_id, $key );
-		}
-
 		// Destroy user's session
 		wp_logout();
 
