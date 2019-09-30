@@ -147,6 +147,8 @@ class WP_Delete_User_Accounts {
 			'button_cancel_text' => __( 'Cancel', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_title' => __( 'Error', 'wp-delete-user-accounts' ),
 			'incorrect_prompt_text' => __( 'Your confirmation input was incorrect.', 'wp-delete-user-accounts' ),
+			'general_error_title' => __( 'Error', 'wp-delete-user-accounts' ),
+			'general_error_text' => __( 'Something went wrong.', 'wp-delete-user-accounts' ),
 			'processing_title' => __( 'Processing...', 'wp-delete-user-accounts' ),
 			'processing_text' => __( 'Just a moment while we process your request.', 'wp-delete-user-accounts' ),
 			'input_placeholder' => sprintf( '%s %s', __( 'Confirm by typing', 'wp-delete-user-accounts' ), $confirm_text ),

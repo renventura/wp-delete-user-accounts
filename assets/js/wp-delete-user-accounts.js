@@ -20,24 +20,34 @@ jQuery(document).ready(function($) {
 
 		// Send the AJAX POST request
 		var send = function() {
-			$.post( ajaxurl, data, function(response) {
-				if ( typeof( response.status ) != 'undefined' && response.status == 'success' ) {
-					// Account deleted
-					swal(
-						{
-							title: response.title,
-							text: response.message,
-							type: 'success',
-							timer: 6000
-						},
-						function() {
-							window.location.href = wp_delete_user_accounts_js.redirect_url;
-						}
-					);
-				} else { // Error occurred
-					swal( response.title, response.message, 'error' );
+			$.ajax({
+				type: "POST",
+				url: ajaxurl,
+				data: data,
+				dataType: 'json',
+				success: function(response) {
+					if ( typeof( response.status ) != 'undefined' && response.status == 'success' ) {
+			 		// Account deleted
+			 		swal(
+			 			{
+			 				title: response.title,
+			 				text: response.message,
+			 				type: 'success',
+			 				timer: 6000
+			 			},
+			 			function() {
+			 				window.location.href = wp_delete_user_accounts_js.redirect_url;
+			 			}
+			 		);
+			 	  } else { // Error occurred
+			 		swal( response.title, response.message, 'error' );
+			 	  }
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					swal( wp_delete_user_accounts_js.general_error_title, wp_delete_user_accounts_js.general_error_text, 'error' );
+					console.log(jqXHR, textStatus, errorThrown);
 				}
-			} );
+			  });
 
 			return false;
 		}
