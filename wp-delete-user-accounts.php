@@ -137,7 +137,7 @@ class WP_Delete_User_Accounts {
 
 		global $post;
 
-		$confirm_text = apply_filters( 'wp_delete_user_account_confirm_delete_text', __( 'DELETE', 'tdomain' ) );
+		$confirm_text = apply_filters( 'wp_delete_user_account_confirm_delete_text', __( 'DELETE', 'wp-delete-user-accounts' ) );
 
 		$vars = apply_filters( 'wp_delete_user_accounts_localize_script_vars', array(
 			'alert_title' => __( 'Whoa, there!', 'wp-delete-user-accounts' ),
