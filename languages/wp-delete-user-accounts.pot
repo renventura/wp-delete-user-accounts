@@ -1,4 +1,4 @@
-# Copyright (C) 2018 wp-delete-user-accounts
+# Copyright (C) 2019 wp-delete-user-accounts
 # This file is distributed under the same license as the wp-delete-user-accounts package.
 msgid ""
 msgstr ""
@@ -16,47 +16,55 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: wp-delete-user-accounts.php:141
-msgid "Whoa, there!"
-msgstr ""
-
-#: wp-delete-user-accounts.php:142
-msgid "Once you delete your account, there's no getting it back. Make sure you want to do this."
+#: wp-delete-user-accounts.php:140
+msgid "DELETE"
 msgstr ""
 
 #: wp-delete-user-accounts.php:143
-msgid "Yep, delete it"
+msgid "Whoa, there!"
 msgstr ""
 
 #: wp-delete-user-accounts.php:144
-msgid "Cancel"
-msgstr ""
-
-#: wp-delete-user-accounts.php:145
-msgid "Error"
+msgid "Once you delete your account, there's no getting it back. Make sure you want to do this."
 msgstr ""
 
 #: wp-delete-user-accounts.php:146
-msgid "Your confirmation input was incorrect."
+msgid "Yep, delete it"
 msgstr ""
 
 #: wp-delete-user-accounts.php:147
-msgid "Processing..."
+msgid "Cancel"
 msgstr ""
 
-#: wp-delete-user-accounts.php:148
-msgid "Just a moment while we process your request."
+#: wp-delete-user-accounts.php:148, wp-delete-user-accounts.php:150
+msgid "Error"
 msgstr ""
 
 #: wp-delete-user-accounts.php:149
-msgid "Confirm by typing DELETE"
+msgid "Your confirmation input was incorrect."
 msgstr ""
 
-#: includes/admin.php:30
+#: wp-delete-user-accounts.php:151
+msgid "Something went wrong."
+msgstr ""
+
+#: wp-delete-user-accounts.php:152
+msgid "Processing..."
+msgstr ""
+
+#: wp-delete-user-accounts.php:153
+msgid "Just a moment while we process your request."
+msgstr ""
+
+#: wp-delete-user-accounts.php:154
+msgid "Confirm by typing"
+msgstr ""
+
+#: includes/admin-profile.php:30
 msgid "Delete Account"
 msgstr ""
 
-#: includes/admin.php:32, includes/frontend.php:43
+#: includes/admin-profile.php:32, includes/frontend.php:43
 msgid "This will cause your account to be permanently deleted. You will not be able to recover your account."
 msgstr ""
 
@@ -64,7 +72,7 @@ msgstr ""
 msgid "Delete My Account"
 msgstr ""
 
-#: includes/process-ajax.php:36, includes/process-ajax.php:45, includes/process-ajax.php:80
+#: includes/process-ajax.php:36, includes/process-ajax.php:45, includes/process-ajax.php:69
 msgid "Error!"
 msgstr ""
 
@@ -76,14 +84,14 @@ msgstr ""
 msgid "Administrators cannot delete their own accounts."
 msgstr ""
 
-#: includes/process-ajax.php:72
+#: includes/process-ajax.php:61
 msgid "Success!"
 msgstr ""
 
-#: includes/process-ajax.php:73
+#: includes/process-ajax.php:62
 msgid "Your account was successfully deleted. Fair well."
 msgstr ""
 
-#: includes/process-ajax.php:81
+#: includes/process-ajax.php:70
 msgid "Request failed."
 msgstr ""

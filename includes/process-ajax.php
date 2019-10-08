@@ -50,9 +50,6 @@ class WP_Delete_User_Accounts_AJAX {
 		// Get the current user
 		$user_id = get_current_user_id();
 
-		// Destroy user's session
-		wp_logout();
-
 		// Delete the user's account
 		$deleted = wp_delete_user( $user_id );
 
