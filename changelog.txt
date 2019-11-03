@@ -1,5 +1,9 @@
 WP Delete User Accounts
 
+November 3, 2019 - version 1.2.2.
+* Remove wp_logout(), which was causing processing to get stuck
+* Use `$.ajax()` instead of `$.post()`
+
 December 19, 2018 - version 1.2.1
 * Made the DELETE text (for confirming account deletion) translatable
 
