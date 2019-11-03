@@ -81,6 +81,10 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.2.2__
+* Remove wp_logout(), which was causing processing to get stuck
+* Use `$.ajax()` instead of `$.post()`
+
 __1.2.1__
 * Made the DELETE text (for confirming account deletion) translatable
 

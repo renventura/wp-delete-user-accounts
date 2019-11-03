@@ -2,8 +2,8 @@
 
 Contributors: renventura
 Tags: profiles, accounts
-Tested up to: 5.0
-Stable tag: 1.2.1
+Tested up to: 5.3
+Stable tag: 1.2.2
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -35,6 +35,10 @@ Allow your users (except for administrators) to manually delete their own accoun
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.2.2 =
+* Remove wp_logout(), which was causing processing to get stuck
+* Use `$.ajax()` instead of `$.post()`
 
 = 1.2.1 =
 * Made the DELETE text (for confirming account deletion) translatable
