@@ -12,6 +12,12 @@ Allow your users (except for administrators) to manually delete their own accoun
 == Description ==
 Allow your users (except for administrators) to manually delete their own accounts. It uses the <a href="http://t4t5.github.io/sweetalert/">Sweet Alert</a> jQuery plugin for slick-looking alerts and prompts.
 
+By default, this plugin adds a button to a user's profile page in the wp-admin. You can also add a delete button to any page or post using the `[wp_delete_user_accounts]` shortcode.
+
+NOTE: Delete buttons are not displayed when logged in as an administrator. This is done to protect against locking yourself out of your site. To see the delete button, you’ll need to log in with an account that does not have the administrator role.
+
+For more technical info, including available hooks (actions and filters), please see the plugin's readme file on Github.
+
 == Installation ==
 
 = Automatically =
