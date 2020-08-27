@@ -1,6 +1,6 @@
 # WP Delete User Accounts
 
-Allow your users (except for administrators) to manually delete their own accounts. This plugin is used in the tutorial at [EngageWP.com](http://www.engagewp.com/wordpress-allow-users-delete-accounts), and can be used in a live setting.  It uses the [Sweet Alert](http://t4t5.github.io/sweetalert/) jQuery plugin for slick-looking alerts and prompts.
+Allow your users (except for administrators) to manually delete their own accounts. It uses the [Sweet Alert](http://t4t5.github.io/sweetalert/) jQuery plugin for slick-looking alerts and prompts.
 
 ## Installation ##
 

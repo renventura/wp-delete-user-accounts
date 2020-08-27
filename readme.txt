@@ -16,7 +16,7 @@ By default, this plugin adds a button to a user's profile page in the wp-admin. 
 
 NOTE: Delete buttons are not displayed when logged in as an administrator. This is done to protect against locking yourself out of your site. To see the delete button, you’ll need to log in with an account that does not have the administrator role.
 
-For more technical info, including available hooks (actions and filters), please see the plugin's readme file on Github.
+For more technical info, including available hooks (actions and filters), please see the plugin's [readme file on Github](https://github.com/renventura/wp-delete-user-accounts).
 
 == Installation ==
 
