@@ -81,6 +81,9 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.2.3__
+* WP Tested Up To 6.0
+
 __1.2.2__
 * Remove wp_logout(), which was causing processing to get stuck
 * Use `$.ajax()` instead of `$.post()`

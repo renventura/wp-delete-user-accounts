@@ -3,7 +3,7 @@
 Contributors: renventura
 Tags: profiles, accounts
 Tested up to: 6.0
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -41,6 +41,9 @@ For more technical info, including available hooks (actions and filters), please
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.2.3 =
+* WP Tested Up To 6.0
 
 = 1.2.2 =
 * Remove wp_logout(), which was causing processing to get stuck

@@ -1,5 +1,8 @@
 WP Delete User Accounts
 
+September 20, 2022 - version 1.2.3.
+* WP Tested Up To 6.0
+
 November 3, 2019 - version 1.2.2.
 * Remove wp_logout(), which was causing processing to get stuck
 * Use `$.ajax()` instead of `$.post()`
