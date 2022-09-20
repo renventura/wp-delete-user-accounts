@@ -2,7 +2,7 @@
 
 Contributors: renventura
 Tags: profiles, accounts
-Tested up to: 5.5
+Tested up to: 6.0
 Stable tag: 1.2.2
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
