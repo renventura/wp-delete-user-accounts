@@ -9,7 +9,7 @@
 
 <div class="delete-user-account-container">
 	
-	<p><?php echo $label; ?></p>
+	<p><?php echo esc_attr( $label ); ?></p>
 
 	<?php wp_delete_user_account_delete_button( $button_text ); ?>
 
