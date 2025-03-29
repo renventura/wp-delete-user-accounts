@@ -2,8 +2,8 @@
 
 Contributors: renventura
 Tags: profiles, accounts
-Tested up to: 6.0
-Stable tag: 1.2.3
+Tested up to: 6.7
+Stable tag: 1.2.4
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -41,6 +41,10 @@ For more technical info, including available hooks (actions and filters), please
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.2.4 =
+* Fixed unescaped shortcode label
+* WP Tested Up To 6.7
 
 = 1.2.3 =
 * WP Tested Up To 6.0

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Delete User Accounts
  * Description: Allow your users to manually delete their own accounts.
- * Version: 1.2.3
+ * Version: 1.2.4
  * Author: Ren Ventura
  * Author URI: https://renventura.com
  *
@@ -67,7 +67,7 @@ class WP_Delete_User_Accounts {
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_VERSION' ) ) {
-			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.2.3' );
+			define( 'WP_DELETE_USER_ACCOUNTS_VERSION', '1.2.4' );
 		}
 
 		if ( ! defined( 'WP_DELETE_USER_ACCOUNTS_PLUGIN_BASENAME' ) ) {

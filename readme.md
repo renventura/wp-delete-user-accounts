@@ -81,6 +81,10 @@ If you find an issue, let me know!
 
 ## Changelog ##
 
+__1.2.4__
+* Fixed unescaped shortcode label
+* WP Tested Up To 6.7
+
 __1.2.3__
 * WP Tested Up To 6.0
 
