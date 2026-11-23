@@ -1,6 +1,8 @@
 # WP Delete User Accounts
 
-Allow your users (except for administrators) to manually delete their own accounts. It uses the [Sweet Alert](http://t4t5.github.io/sweetalert/) jQuery plugin for slick-looking alerts and prompts.
+Allow your users (except for administrators) to manually delete their own accounts. Users confirm by typing DELETE into a native browser dialog. No jQuery or third-party scripts are loaded.
+
+Requires WordPress 6.0+ and PHP 7.4+.
 
 ## Installation ##
 
@@ -36,7 +38,7 @@ add_filter( 'wp_delete_user_accounts_shortcode_template', 'wp_delete_user_accoun
  *	@param array 		$atts 		Shortcode attributes
  */
 function wp_delete_user_accounts_custom_shortcode_template( $path, $atts ) {
-	return get_stylesheet_directory() . '/templates/custom-shortcode.php' );
+	return get_stylesheet_directory() . '/templates/custom-shortcode.php';
 }
 ```
 
@@ -76,10 +78,52 @@ function wp_delete_user_accounts_delete_button_after_edit_account() {
 }
 ```
 
+`wp_delete_user_accounts_localize_script_vars` (filter) Change the dialog text or the redirect URL after deletion.
+
+```php
+add_filter( 'wp_delete_user_accounts_localize_script_vars', function ( $vars ) {
+	$vars['redirect_url'] = home_url( '/goodbye/' );
+	return $vars;
+} );
+```
+
+## Development ##
+
+Tooling runs in Docker, so only Docker is required:
+
+```sh
+docker compose run --rm php composer install
+docker compose run --rm php composer check   # PHPCS, PHPStan, PHPUnit
+PHP_VERSION=7.4 docker compose run --rm php composer test   # another PHP version
+docker compose down
+```
+
+- `composer lint` / `composer lint:fix`: WordPress Coding Standards and PHP 7.4+ compatibility (PHPCS).
+- `composer analyse`: PHPStan (level 6) with WordPress stubs.
+- `composer test`: integration tests against the WordPress test suite and MySQL.
+- Regenerate the translation template with WP-CLI: `wp i18n make-pot . languages/wp-delete-user-accounts.pot`.
+
+CI runs the same checks plus the official WordPress Plugin Check on every pull request. Publishing a GitHub release deploys to WordPress.org.
+
 ## Bugs ##
 If you find an issue, let me know!
 
 ## Changelog ##
+
+__1.3.0__
+* Replaced the unmaintained SweetAlert library and the jQuery dependency with a native `<dialog>`
+* Hardened the AJAX handler (sanitized nonce, explicit login check)
+* Fixed asset loading in the admin when the current screen is not available
+* The delete button can appear more than once on a page
+* Load translations on `init`, as WordPress 6.7+ expects
+* Added integration tests, coding standards and static analysis, run in CI
+* Requires WordPress 6.0+ and PHP 7.4+
+* WP Tested Up To 7.1, PHP Tested Up To 8.6
+
+__1.2.5__
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
+* WP Tested Up To 7.1
 
 __1.2.4__
 * Fixed unescaped shortcode label

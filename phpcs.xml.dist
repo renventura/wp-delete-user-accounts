@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ruleset name="WP Delete User Accounts">
+	<description>WordPress Coding Standards and PHP compatibility checks.</description>
+
+	<file>.</file>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<config name="minimum_wp_version" value="6.0"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<rule ref="WordPress"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="wp-delete-user-accounts"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="wp_delete_user_account"/>
+				<element value="WP_Delete_User_Account"/>
+			</property>
+		</properties>
+		<exclude-pattern>/tests/*</exclude-pattern>
+	</rule>
+
+	<!-- Renaming existing files would break anyone who references them; tests follow PHPUnit naming. -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+
+	<!-- The main file keeps the class and its public WP_Delete_User_Accounts() accessor together. -->
+	<rule ref="Universal.Files.SeparateFunctionsFromOO.Mixed">
+		<exclude-pattern>/wp-delete-user-accounts.php</exclude-pattern>
+	</rule>
+</ruleset>

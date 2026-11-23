@@ -1,0 +1,10 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    bootstrapFiles:
+        - tests/phpstan-bootstrap.php
+    level: 6
+    paths:
+        - wp-delete-user-accounts.php
+        - includes
+        - templates
