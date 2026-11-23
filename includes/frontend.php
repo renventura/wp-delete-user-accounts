@@ -39,10 +39,14 @@ class WP_Delete_User_Accounts_Frontend {
 		}
 
 		// Attributes
-		extract( shortcode_atts( array(
-			'label' => __( 'This will cause your account to be permanently deleted. You will not be able to recover your account.', 'wp-delete-user-accounts' ),
+		$atts = shortcode_atts( array(
+			'label'       => __( 'This will cause your account to be permanently deleted. You will not be able to recover your account.', 'wp-delete-user-accounts' ),
 			'button_text' => '',
-		), $atts ) );
+		), $atts, 'wp_delete_user_accounts' );
+
+		// Variables used by the template. Both are escaped on output.
+		$label       = (string) $atts['label'];
+		$button_text = (string) $atts['button_text'];
 
 		ob_start();
 		
@@ -51,7 +55,7 @@ class WP_Delete_User_Accounts_Frontend {
 		 *
 		 *	@param (array) $atts - Shortcode attributes
 		 */
-		include_once apply_filters( 'wp_delete_user_accounts_shortcode_template', WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR . 'shortcode-wp_delete_user_accounts.php', $atts );
+		include apply_filters( 'wp_delete_user_accounts_shortcode_template', WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR . 'shortcode-wp_delete_user_accounts.php', $atts );
 		
 		return ob_get_clean();
 	}
