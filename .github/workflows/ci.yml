@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.6'
+          tools: composer:v2
+          coverage: none
+      - run: composer install --no-interaction --no-progress
+      - name: PHPCS (WordPress Coding Standards, PHP 7.4+ compatibility)
+        run: composer lint
+      - name: PHPStan
+        run: composer analyse
+      - name: JavaScript syntax
+        run: node --check assets/js/wp-delete-user-accounts.js
+
+  test:
+    name: Test (PHP ${{ matrix.php }}, WP ${{ matrix.wp }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Oldest supported pair, and the latest releases.
+          - { php: '7.4', wp: '6.0' }
+          - { php: '8.6', wp: 'latest' }
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+        ports: ['3306:3306']
+        options: --health-cmd="mysqladmin ping -proot" --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      WP_DB_HOST: 127.0.0.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli
+          tools: composer:v2
+          coverage: none
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+        if: matrix.wp == 'latest'
+      - name: Install dependencies for WordPress ${{ matrix.wp }}
+        if: matrix.wp != 'latest'
+        run: |
+          composer require --dev --no-interaction --no-progress --no-update \
+            "wp-phpunit/wp-phpunit:${{ matrix.wp }}.*" "roots/wordpress-no-content:${{ matrix.wp }}.*"
+          composer update --no-interaction --no-progress -W
+      - run: composer test
+
+  plugin-check:
+    name: Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Check exactly what ships to WordPress.org (export-ignore rules applied).
+      # The directory name is used as the plugin slug, so it must match the text domain.
+      - name: Build plugin directory
+        run: |
+          mkdir -p build/wp-delete-user-accounts
+          git archive HEAD | tar -x -C build/wp-delete-user-accounts
+      - uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: build/wp-delete-user-accounts
+          # The plugin name and slug predate the "WP" trademark rule and can't change.
+          exclude-checks: trademarks

@@ -1,103 +1,190 @@
-jQuery(document).ready(function($) {
+/**
+ * Confirm and process account deletion using a native <dialog>.
+ *
+ * Settings come from wp_localize_script() as window.wp_delete_user_accounts_js.
+ * All text is inserted with textContent, never as HTML.
+ */
+( function () {
+	'use strict';
+
+	var settings = window.wp_delete_user_accounts_js;
+
+	if ( ! settings ) {
+		return;
+	}
+
+	var ajaxUrl = settings.ajaxurl || window.ajaxurl;
+	var ui = null;
 
 	/**
-	 *	Process request to dismiss our admin notice
+	 * Build the dialog once and reuse it.
 	 */
-	$('#delete-my-account').click(function(e) {
-
-		e.preventDefault();
-
-		// Set the ajaxurl when not in the admin
-		if ( wp_delete_user_accounts_js.is_admin != 'true' ) {
-			ajaxurl = wp_delete_user_accounts_js.ajaxurl;
+	function getDialog() {
+		if ( ui ) {
+			return ui;
 		}
 
-		// Data to make available via the $_POST variable
-		data = {
-			action: 'wp_delete_user_account',
-			wp_delete_user_accounts_nonce: wp_delete_user_accounts_js.nonce
+		var dialog = document.createElement( 'dialog' );
+		dialog.className = 'wp-delete-user-accounts-dialog';
+		dialog.setAttribute( 'aria-labelledby', 'wp-delete-user-accounts-dialog-title' );
+
+		var form = document.createElement( 'form' );
+		form.method = 'dialog';
+
+		var icon = document.createElement( 'div' );
+		icon.className = 'wp-delete-user-accounts-icon';
+		icon.setAttribute( 'aria-hidden', 'true' );
+
+		var title = document.createElement( 'h2' );
+		title.id = 'wp-delete-user-accounts-dialog-title';
+
+		var text = document.createElement( 'p' );
+
+		var input = document.createElement( 'input' );
+		input.type = 'text';
+		input.autocomplete = 'off';
+		input.placeholder = settings.input_placeholder;
+		input.setAttribute( 'aria-label', settings.input_placeholder );
+
+		var actions = document.createElement( 'div' );
+		actions.className = 'wp-delete-user-accounts-dialog-actions';
+
+		var cancel = document.createElement( 'button' );
+		cancel.type = 'button';
+		cancel.className = 'wp-delete-user-accounts-cancel';
+
+		var confirm = document.createElement( 'button' );
+		confirm.type = 'submit';
+		confirm.className = 'wp-delete-user-accounts-confirm';
+
+		actions.append( cancel, confirm );
+		form.append( icon, title, text, input, actions );
+		dialog.append( form );
+		document.body.append( dialog );
+
+		ui = { dialog: dialog, form: form, icon: icon, title: title, text: text, input: input, cancel: cancel, confirm: confirm, onSubmit: null };
+
+		cancel.addEventListener( 'click', function () {
+			dialog.close();
+		} );
+
+		form.addEventListener( 'submit', function ( e ) {
+			e.preventDefault();
+			if ( ui.onSubmit ) {
+				ui.onSubmit();
+			}
+		} );
+
+		return ui;
+	}
+
+	/**
+	 * Render a dialog state.
+	 *
+	 * @param {Object} state name, icon (success|error|info), title, text, input (bool), confirmText, cancelText, onSubmit, busy (bool).
+	 */
+	function render( state ) {
+		var d = getDialog();
+
+		d.icon.hidden = ! state.icon;
+		d.icon.dataset.icon = state.icon || '';
+		d.title.textContent = state.title || '';
+		d.text.textContent = state.text || '';
+		d.input.hidden = ! state.input;
+		d.confirm.hidden = ! state.confirmText;
+		d.confirm.textContent = state.confirmText || '';
+		d.cancel.hidden = ! state.cancelText;
+		d.cancel.textContent = state.cancelText || '';
+		d.dialog.setAttribute( 'aria-busy', state.busy ? 'true' : 'false' );
+		d.dialog.dataset.state = state.name || '';
+		d.onSubmit = state.onSubmit || function () {
+			d.dialog.close();
 		};
 
-		// Send the AJAX POST request
-		var send = function() {
-			$.ajax({
-				type: "POST",
-				url: ajaxurl,
-				data: data,
-				dataType: 'json',
-				success: function(response) {
-					if ( typeof( response.status ) != 'undefined' && response.status == 'success' ) {
-						// Account deleted
-						swal(
-							{
-								title: response.title,
-								text: response.message,
-								type: 'success',
-								timer: 6000
-							},
-							function() {
-								window.location.href = wp_delete_user_accounts_js.redirect_url;
-							}
-						);
-					} else { // Error occurred
-						swal( response.title, response.message, 'error' );
-					}
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					swal( wp_delete_user_accounts_js.general_error_title, wp_delete_user_accounts_js.general_error_text, 'error' );
-					console.log(jqXHR, textStatus, errorThrown);
-				}
-			});
-
-			return false;
+		if ( ! d.dialog.open ) {
+			d.dialog.showModal();
 		}
 
-		// Main prompt
-		swal(
-			{
-				title: wp_delete_user_accounts_js.alert_title,
-				text: wp_delete_user_accounts_js.alert_text,
-				type: 'input',
-				animation: 'slide-from-top',
-				showCancelButton: true,
-				closeOnConfirm: false,
-				confirmButtonText: wp_delete_user_accounts_js.button_confirm_text,
-				cancelButtonText: wp_delete_user_accounts_js.button_cancel_text,
-				confirmButtonColor: '#EC5245',
-				disableButtonsOnConfirm: true,
-				// showLoaderOnConfirm: true,
-				// confirmLoadingButtonColor: '#f5f7fa',
-				inputPlaceholder: wp_delete_user_accounts_js.input_placeholder
-			},
-			function(input) {
+		( state.input ? d.input : d.confirm ).focus();
+	}
 
-				if ( input !== wp_delete_user_accounts_js.confirm_text ) {
-					// Input was not correct
-					swal(
-						{
-							title: wp_delete_user_accounts_js.incorrect_prompt_title,
-							text: wp_delete_user_accounts_js.incorrect_prompt_text,
-							type: 'error',
-							showLoaderOnConfirm: false,
-						}
+	function showMessage( icon, title, text, onClose ) {
+		render( {
+			name: 'message',
+			icon: icon,
+			title: title,
+			text: text,
+			confirmText: settings.button_ok_text || 'OK',
+			onSubmit: function () {
+				getDialog().dialog.close();
+				if ( onClose ) {
+					onClose();
+				}
+			},
+		} );
+	}
+
+	function redirect() {
+		window.location.href = settings.redirect_url;
+	}
+
+	function send() {
+		render( { name: 'processing', icon: 'info', title: settings.processing_title, text: settings.processing_text, busy: true } );
+
+		var body = new FormData();
+		body.append( 'action', 'wp_delete_user_account' );
+		body.append( 'wp_delete_user_accounts_nonce', settings.nonce );
+
+		fetch( ajaxUrl, { method: 'POST', body: body, credentials: 'same-origin' } )
+			.then( function ( response ) {
+				return response.json();
+			} )
+			.then( function ( response ) {
+				if ( response && 'success' === response.status ) {
+					showMessage( 'success', response.title, response.message, redirect );
+					// The account is gone, so leave the page even if the user does nothing.
+					setTimeout( redirect, 6000 );
+				} else {
+					showMessage(
+						'error',
+						( response && response.title ) || settings.general_error_title,
+						( response && response.message ) || settings.general_error_text
 					);
+				}
+			} )
+			.catch( function ( error ) {
+				showMessage( 'error', settings.general_error_title, settings.general_error_text );
+				window.console && console.error( error ); // eslint-disable-line no-console
+			} );
+	}
+
+	function confirmDelete() {
+		var d = getDialog();
+		d.input.value = '';
+
+		render( {
+			name: 'confirm',
+			title: settings.alert_title,
+			text: settings.alert_text,
+			input: true,
+			confirmText: settings.button_confirm_text,
+			cancelText: settings.button_cancel_text,
+			onSubmit: function () {
+				if ( d.input.value !== settings.confirm_text ) {
+					showMessage( 'error', settings.incorrect_prompt_title, settings.incorrect_prompt_text );
 					return;
 				}
+				send();
+			},
+		} );
+	}
 
-				// Processing modal
-				swal(
-					{
-						title: wp_delete_user_accounts_js.processing_title,
-						text: wp_delete_user_accounts_js.processing_text,
-						type: 'info',
-						confirmLoadingButtonColor: '#f5f7fa',
-						showConfirmButton: false
-					}
-				);
-
-				// Wait 2 seconds and send request
-				setTimeout(send, 2000);
-			}
-		);
-	});
-});
+	document.addEventListener( 'click', function ( e ) {
+		var button = e.target.closest( '.wp-delete-user-account-button, #delete-my-account' );
+		if ( ! button ) {
+			return;
+		}
+		e.preventDefault();
+		confirmDelete();
+	} );
+}() );

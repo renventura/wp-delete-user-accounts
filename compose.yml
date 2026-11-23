@@ -1,0 +1,24 @@
+# Local test environment: `docker compose run --rm php composer check`.
+# Set PHP_VERSION to test another PHP release, e.g. PHP_VERSION=7.4.
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress_test
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-proot"]
+      interval: 2s
+      retries: 30
+  php:
+    build:
+      context: tests
+      args:
+        PHP_VERSION: ${PHP_VERSION:-8.6}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WP_DB_HOST: db
+    volumes:
+      - .:/app

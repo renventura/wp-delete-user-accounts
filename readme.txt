@@ -1,16 +1,18 @@
 === WP Delete User Accounts ===
 
 Contributors: renventura
-Tags: profiles, accounts
-Tested up to: 6.7
-Stable tag: 1.2.4
-License: GPL 2.0+
-License URI: http://www.opensource.org/licenses/gpl-license.php
+Tags: profiles, accounts, delete account, gdpr, users
+Requires at least: 6.0
+Tested up to: 7.1
+Requires PHP: 7.4
+Stable tag: 1.3.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Allow your users (except for administrators) to manually delete their own accounts.
 
 == Description ==
-Allow your users (except for administrators) to manually delete their own accounts. It uses the <a href="http://t4t5.github.io/sweetalert/">Sweet Alert</a> jQuery plugin for slick-looking alerts and prompts.
+Allow your users (except for administrators) to manually delete their own accounts. Users confirm by typing DELETE into a native browser dialog. No jQuery or third-party scripts are loaded.
 
 By default, this plugin adds a button to a user's profile page in the wp-admin. You can also add a delete button to any page or post using the `[wp_delete_user_accounts]` shortcode.
 
@@ -41,6 +43,17 @@ For more technical info, including available hooks (actions and filters), please
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.3.0 =
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
+* Replaced the unmaintained SweetAlert library and the jQuery dependency with a native dialog
+* Hardened the AJAX handler (sanitized nonce, explicit login check)
+* Fixed asset loading in the admin when the current screen is not available
+* Every delete button on a page opens the dialog (adds a `wp-delete-user-account-button` class)
+* Load translations on `init`, as WordPress 6.7+ expects
+* Requires WordPress 6.0+ and PHP 7.4+
+* Tested with WordPress 7.1 and PHP 8.6
 
 = 1.2.4 =
 * Fixed unescaped shortcode label

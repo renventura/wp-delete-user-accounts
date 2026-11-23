@@ -1,62 +1,85 @@
 <?php
 /**
- *	Front-end side of things
+ *  Front-end side of things
  *
- *	@package WP Delete User Accounts
- *	@author Ren Ventura
+ *  @package WP Delete User Accounts
+ *  @author Ren Ventura
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'WP_Delete_User_Accounts_Frontend' ) ) :
 
-class WP_Delete_User_Accounts_Frontend {
-
-	public function __construct() {
-
-		$this->init();
-	}
-
 	/**
-	 *	Initialize everything
+	 * The [wp_delete_user_accounts] shortcode.
 	 */
-	public function init() {
+	class WP_Delete_User_Accounts_Frontend {
 
-		add_shortcode( 'wp_delete_user_accounts', array( $this, 'wp_delete_user_accounts' ) );
-	}
-
-	/**
-	 *	Render [wp_delete_user_accounts] shortcode
-	 */
-	public function wp_delete_user_accounts( $atts ) {
-
-		// Show nothing if user is logged out
-		if ( ! is_user_logged_in() ) {
-			return '';
-		}
-
-		// Bail to prevent administrators from deleting their own accounts
-		if ( current_user_can( 'manage_options' ) ) {
-			return '';
-		}
-
-		// Attributes
-		extract( shortcode_atts( array(
-			'label' => __( 'This will cause your account to be permanently deleted. You will not be able to recover your account.', 'wp-delete-user-accounts' ),
-			'button_text' => '',
-		), $atts ) );
-
-		ob_start();
-		
 		/**
-		 *	Template path
-		 *
-		 *	@param (array) $atts - Shortcode attributes
+		 * Register hooks.
 		 */
-		include_once apply_filters( 'wp_delete_user_accounts_shortcode_template', WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR . 'shortcode-wp_delete_user_accounts.php', $atts );
-		
-		return ob_get_clean();
-	}
-}
+		public function __construct() {
 
-new WP_Delete_User_Accounts_Frontend;
+			$this->init();
+		}
+
+		/**
+		 *  Initialize everything
+		 *
+		 * @return void
+		 */
+		public function init() {
+
+			add_shortcode( 'wp_delete_user_accounts', array( $this, 'wp_delete_user_accounts' ) );
+		}
+
+		/**
+		 *  Render [wp_delete_user_accounts] shortcode
+		 *
+		 *  @param array<string, string>|string $atts Shortcode attributes (an empty string when none are given).
+		 *  @return string
+		 */
+		public function wp_delete_user_accounts( $atts ) {
+
+			// Show nothing if user is logged out.
+			if ( ! is_user_logged_in() ) {
+				return '';
+			}
+
+			// Bail to prevent administrators from deleting their own accounts.
+			if ( current_user_can( 'manage_options' ) ) {
+				return '';
+			}
+
+			// Attributes.
+			$atts = shortcode_atts(
+				array(
+					'label'       => __( 'This will cause your account to be permanently deleted. You will not be able to recover your account.', 'wp-delete-user-accounts' ),
+					'button_text' => '',
+				),
+				$atts,
+				'wp_delete_user_accounts'
+			);
+
+			// Variables used by the template. Both are escaped on output.
+			$label       = (string) $atts['label'];
+			$button_text = (string) $atts['button_text'];
+
+			ob_start();
+
+			/**
+			 *  Template path
+			 *
+			 *  @param (array) $atts - Shortcode attributes
+			 */
+			include apply_filters( 'wp_delete_user_accounts_shortcode_template', WP_DELETE_USER_ACCOUNTS_TEMPLATE_DIR . 'shortcode-wp_delete_user_accounts.php', $atts );
+
+			return ob_get_clean();
+		}
+	}
+
+	new WP_Delete_User_Accounts_Frontend();
 
 endif;
