@@ -1,5 +1,14 @@
 WP Delete User Accounts
 
+November 23, 2026 - version 1.2.5
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
+* WP Tested Up To 7.1
+
+March 28, 2025 - version 1.2.4
+* Fixed unescaped shortcode label
+* WP Tested Up To 6.7
+
 September 20, 2022 - version 1.2.3.
 * WP Tested Up To 6.0
 

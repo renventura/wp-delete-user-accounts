@@ -2,8 +2,8 @@
 
 Contributors: renventura
 Tags: profiles, accounts
-Tested up to: 6.7
-Stable tag: 1.2.4
+Tested up to: 7.1
+Stable tag: 1.2.5
 License: GPL 2.0+
 License URI: http://www.opensource.org/licenses/gpl-license.php
 
@@ -41,6 +41,11 @@ For more technical info, including available hooks (actions and filters), please
 4. Account deleted successfully. 
 
 == Changelog ==
+
+= 1.2.5 =
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
+* WP Tested Up To 7.1
 
 = 1.2.4 =
 * Fixed unescaped shortcode label
