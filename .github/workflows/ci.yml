@@ -76,12 +76,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Check exactly what ships to WordPress.org (export-ignore rules applied).
+      # The directory name is used as the plugin slug, so it must match the text domain.
       - name: Build plugin directory
         run: |
-          mkdir -p build
-          git archive HEAD | tar -x -C build
+          mkdir -p build/wp-delete-user-accounts
+          git archive HEAD | tar -x -C build/wp-delete-user-accounts
       - uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: build
+          build-dir: build/wp-delete-user-accounts
           # The plugin name and slug predate the "WP" trademark rule and can't change.
           exclude-checks: trademarks

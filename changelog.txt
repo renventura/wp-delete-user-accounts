@@ -1,19 +1,16 @@
 WP Delete User Accounts
 
-version 1.3.0
+November 23, 2026 - version 1.3.0
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
 * Replaced the unmaintained SweetAlert library and the jQuery dependency with a native dialog
 * Hardened the AJAX handler (sanitized nonce, explicit login check)
 * Fixed asset loading in the admin when the current screen is not available
-* The delete button can appear more than once on a page
+* Every delete button on a page opens the dialog (adds a `wp-delete-user-account-button` class)
 * Load translations on `init`, as WordPress 6.7+ expects
 * Added integration tests, coding standards and static analysis, run in CI
 * Requires WordPress 6.0+ and PHP 7.4+
 * Tested with WordPress 7.1 and PHP 8.6
-
-November 23, 2026 - version 1.2.5
-* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
-* Fixed the shortcode rendering only once per page
-* WP Tested Up To 7.1
 
 March 28, 2025 - version 1.2.4
 * Fixed unescaped shortcode label

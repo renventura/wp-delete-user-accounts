@@ -111,19 +111,16 @@ If you find an issue, let me know!
 ## Changelog ##
 
 __1.3.0__
+* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
+* Fixed the shortcode rendering only once per page
 * Replaced the unmaintained SweetAlert library and the jQuery dependency with a native `<dialog>`
 * Hardened the AJAX handler (sanitized nonce, explicit login check)
 * Fixed asset loading in the admin when the current screen is not available
-* The delete button can appear more than once on a page
+* Every delete button on a page opens the dialog (adds a `wp-delete-user-account-button` class)
 * Load translations on `init`, as WordPress 6.7+ expects
 * Added integration tests, coding standards and static analysis, run in CI
 * Requires WordPress 6.0+ and PHP 7.4+
 * WP Tested Up To 7.1, PHP Tested Up To 8.6
-
-__1.2.5__
-* Security: Escape the shortcode `button_text` attribute to fix an authenticated (Contributor+) stored XSS (CVE-2025-58704)
-* Fixed the shortcode rendering only once per page
-* WP Tested Up To 7.1
 
 __1.2.4__
 * Fixed unescaped shortcode label
