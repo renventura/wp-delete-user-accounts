@@ -31,6 +31,10 @@
 		var form = document.createElement( 'form' );
 		form.method = 'dialog';
 
+		var icon = document.createElement( 'div' );
+		icon.className = 'wp-delete-user-accounts-icon';
+		icon.setAttribute( 'aria-hidden', 'true' );
+
 		var title = document.createElement( 'h2' );
 		title.id = 'wp-delete-user-accounts-dialog-title';
 
@@ -54,11 +58,11 @@
 		confirm.className = 'wp-delete-user-accounts-confirm';
 
 		actions.append( cancel, confirm );
-		form.append( title, text, input, actions );
+		form.append( icon, title, text, input, actions );
 		dialog.append( form );
 		document.body.append( dialog );
 
-		ui = { dialog: dialog, form: form, title: title, text: text, input: input, cancel: cancel, confirm: confirm, onSubmit: null };
+		ui = { dialog: dialog, form: form, icon: icon, title: title, text: text, input: input, cancel: cancel, confirm: confirm, onSubmit: null };
 
 		cancel.addEventListener( 'click', function () {
 			dialog.close();
@@ -77,11 +81,13 @@
 	/**
 	 * Render a dialog state.
 	 *
-	 * @param {Object} state title, text, input (bool), confirmText, cancelText, onSubmit, busy (bool).
+	 * @param {Object} state name, icon (success|error|info), title, text, input (bool), confirmText, cancelText, onSubmit, busy (bool).
 	 */
 	function render( state ) {
 		var d = getDialog();
 
+		d.icon.hidden = ! state.icon;
+		d.icon.dataset.icon = state.icon || '';
 		d.title.textContent = state.title || '';
 		d.text.textContent = state.text || '';
 		d.input.hidden = ! state.input;
@@ -102,9 +108,10 @@
 		( state.input ? d.input : d.confirm ).focus();
 	}
 
-	function showMessage( title, text, onClose ) {
+	function showMessage( icon, title, text, onClose ) {
 		render( {
 			name: 'message',
+			icon: icon,
 			title: title,
 			text: text,
 			confirmText: settings.button_ok_text || 'OK',
@@ -122,7 +129,7 @@
 	}
 
 	function send() {
-		render( { name: 'processing', title: settings.processing_title, text: settings.processing_text, busy: true } );
+		render( { name: 'processing', icon: 'info', title: settings.processing_title, text: settings.processing_text, busy: true } );
 
 		var body = new FormData();
 		body.append( 'action', 'wp_delete_user_account' );
@@ -134,18 +141,19 @@
 			} )
 			.then( function ( response ) {
 				if ( response && 'success' === response.status ) {
-					showMessage( response.title, response.message, redirect );
+					showMessage( 'success', response.title, response.message, redirect );
 					// The account is gone, so leave the page even if the user does nothing.
 					setTimeout( redirect, 6000 );
 				} else {
 					showMessage(
+						'error',
 						( response && response.title ) || settings.general_error_title,
 						( response && response.message ) || settings.general_error_text
 					);
 				}
 			} )
 			.catch( function ( error ) {
-				showMessage( settings.general_error_title, settings.general_error_text );
+				showMessage( 'error', settings.general_error_title, settings.general_error_text );
 				window.console && console.error( error ); // eslint-disable-line no-console
 			} );
 	}
@@ -163,7 +171,7 @@
 			cancelText: settings.button_cancel_text,
 			onSubmit: function () {
 				if ( d.input.value !== settings.confirm_text ) {
-					showMessage( settings.incorrect_prompt_title, settings.incorrect_prompt_text );
+					showMessage( 'error', settings.incorrect_prompt_title, settings.incorrect_prompt_text );
 					return;
 				}
 				send();
